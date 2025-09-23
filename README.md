@@ -3,7 +3,16 @@
 This is a repository that contains Jupyter Notebook code using the Python programming language. It is a set of two exercises that make use of Data Wrangling Python Concepts.
 
 ## 1. ECE Board Exam Problem Part 1
-The code imports the Python Data Analysis Library using ```import pandas as pd``` and reads the given ```board2.csv``` file. It then creates a new category called 'Average' by using ```.mean()``` on the 'Math', 'Electronics', 'GEAS', and 'Communication' categories, adding and dividing by row by specifying ```.mean()``` as ```.mean(axis=1)```. The code then locates specific information using ```.loc[]``` and following the given conditions and displays all the located data using ```display()```.
+The code imports the Python Data Analysis Library using ```import pandas as pd``` and reads the given ```board2.csv``` file.
+```
+import pandas as pd #Imports the Python Data Analysis Library
+    df = pd.read_csv('board2.csv') #Reads the board2.csv file
+```
+It then creates a new category called 'Average' by using ```.mean()``` on the 'Math', 'Electronics', 'GEAS', and 'Communication' categories, adding and dividing by row by specifying ```.mean()``` as ```.mean(axis=1)```.
+```
+    df['Average'] = df[['Math', 'Electronics', 'GEAS', 'Communication']].mean(axis=1) #Calculates the mean values of each subject
+```
+The code then locates specific information using ```.loc[]``` and following the given conditions and displays all the located data using ```display()```, assigning the located values to the filenames of Vis, Instru, and Mindy according to the conditions and outputs provided.
 
 • Condition 1: Hometown: Visayas & Math: < 70
 • Output 1: Name, Gender, Track, Math
@@ -13,21 +22,16 @@ The code imports the Python Data Analysis Library using ```import pandas as pd``
 
 • Condition B: Hometown: Mindanao & Gender: Female
 • Output B: Name, Track, Electronics, Average
-```
-import pandas as pd #Imports the Python Data Analysis Library
-def main(): #Defines the code inside as the main function
-    df = pd.read_csv('board2.csv') #Reads the board2.csv file
-
-    df['Average'] = df[['Math', 'Electronics', 'GEAS', 'Communication']].mean(axis=1) #Calculates the mean values of each subject
-    
+ ```
     Vis = df.loc[(df['Hometown'] == 'Visayas') & (df['Math'] < 70), ('Name', 'Gender', 'Track', 'Math')] #Locates the data under Visayas and with a Math score less than 70 and outputs the name, gender, track, and Math score   
     Instru = df.loc[(df['Electronics'] > 70) & (df['Track'] == 'Instrumentation') & (df['Hometown'] == 'Luzon'), ('Name', 'GEAS', 'Electronics')] #Locates data under Instrumentation, Luzon, and with scores greater than 70 and outputs the name, GEAS scores, and Electronics scores
     Mindy = df.loc[(df['Hometown'] == 'Mindanao') & (df['Gender'] == 'Female') & (df['Average'] >= 55), ('Name', 'Track', 'Electronics', 'Average')] #Locates data under Mindanao, Female, and with Average scores greater than or equal to 55 and outputs the name, track, Electronics scores, and and average scores
-    
+```
+This set of code displays the output of the prior lines of code, to be called on by the ```main()``` callback function once the whole function has finished running.
+```
     display(Vis) #Displays the dataframe for problem 1
     display(Instru) #Displays the dataframe from problem a
     display(Mindy) #Displays the dataframe from problem b
-main() #Calls the main function
 ```
 
 ## 2. ECE Board Exam Problem Part 2
