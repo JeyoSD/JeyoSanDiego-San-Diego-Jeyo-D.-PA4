@@ -8,11 +8,11 @@ The code imports the Python Data Analysis Library using ```import pandas as pd``
 import pandas as pd #Imports the Python Data Analysis Library
     df = pd.read_csv('board2.csv') #Reads the board2.csv file
 ```
-It then creates a new category called 'Average' by using ```.mean()``` on the 'Math', 'Electronics', 'GEAS', and 'Communication' categories, adding and dividing by row by specifying ```.mean()``` as ```.mean(axis=1)```.
+It then creates a new feature called 'Average' by using ```.mean()``` on the 'Math', 'Electronics', 'GEAS', and 'Communication' categories, calculates the mean for each row by specifying ```axis=1```.
 ```
     df['Average'] = df[['Math', 'Electronics', 'GEAS', 'Communication']].mean(axis=1) #Calculates the mean values of each subject
 ```
-The code then locates specific information using ```.loc[]``` and following the given conditions and displays all the located data using ```display()```, assigning the located values to the filenames of Vis, Instru, and Mindy according to the conditions and outputs provided.
+The code then locates specific information using ```.loc[]```, locating by finding data based on the column names and boolean conditions, and displays all the located data using ```display()```, assigning the located values to the filenames of Vis, Instru, and Mindy according to the conditions and outputs provided.
 
 • Condition 1: Hometown: Visayas & Math: < 70
 • Output 1: Name, Gender, Track, Math
@@ -27,7 +27,7 @@ The code then locates specific information using ```.loc[]``` and following the 
     Instru = df.loc[(df['Electronics'] > 70) & (df['Track'] == 'Instrumentation') & (df['Hometown'] == 'Luzon'), ('Name', 'GEAS', 'Electronics')] #Locates data under Instrumentation, Luzon, and with scores greater than 70 and outputs the name, GEAS scores, and Electronics scores
     Mindy = df.loc[(df['Hometown'] == 'Mindanao') & (df['Gender'] == 'Female') & (df['Average'] >= 55), ('Name', 'Track', 'Electronics', 'Average')] #Locates data under Mindanao, Female, and with Average scores greater than or equal to 55 and outputs the name, track, Electronics scores, and and average scores
 ```
-This set of code displays the output of the prior lines of code, to be called on by the ```main()``` callback function once the whole function has finished running.
+This set of code displays the output of the prior lines of code, to be called on by the ```main()``` function to be ran.
 ```
     display(Vis) #Displays the dataframe for problem 1
     display(Instru) #Displays the dataframe from problem a
@@ -53,8 +53,6 @@ main() #Calls the main function
 ```
 
 ## 2. ECE Board Exam Problem Part 2
-It uses a combination of ```.loc[]``` and ```.mean()``` to locate the average scores under specific features and finds the mean values of those average scores. It then displays the new dataframe under the name ```avg_df```. At the last segment of the code, the dataframe is visualized into a bar graph using ```.plot(kind='bar')```.
-
 The code imports the Python Data Analysis Library using ```import pandas as pd``` and reads the given ```board2.csv``` file.
 ```
 import pandas as pd #Imports the Python Data Analysis Library
@@ -77,7 +75,7 @@ It uses a combination of ```.loc[]``` and ```.mean()``` to locate the average sc
     Male_avg = df.loc[df['Gender'] == 'Male', 'Average'].mean() #Calculates the mean values of the average scores of the data under the Male gender
     Female_avg = df.loc[df['Gender'] == 'Female', 'Average'].mean() #Calculates the mean values of the average scores of the data under the Female gender
 ```
-All the data produced by the previous set of code is compiled under ```avg_data```, assisted by matching the indexes to their variables as set by the previous set of code. It then displays the new dataframe under the name ```avg_df``` and using the data compiled under ```avg_data```.
+All the average scores are structured under the ```avg_data``` dictionary with their respective keys that correspond to the generated values. This dictionary is then used to create the new dataframe called ```avg_df``` and presented using ```display()``` before it is used for the visualization.
 ```
     avg_data = {'Average Score': {'Instrumentation': Ins_avg, 'Microelectronics': ME_avg, 'Communication': Com_avg,'Luzon': Luz_avg, 'Visayas': Vis_avg, 'Mindanao': Min_avg, 'Male': Male_avg, 'Female': Female_avg}} #Compiles new data using the calculated mean values under the filename avg_data
 
