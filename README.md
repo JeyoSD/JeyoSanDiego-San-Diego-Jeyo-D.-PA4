@@ -89,6 +89,34 @@ The data in the newly created ```avg_df``` is visualized into a bar graph and di
     avg_df.plot(kind='bar') #Visualizes the avg_df dataframe with a bar graph
 ```
 
+### ECE Board Exam Problem Part 2 Full Code:
+```
+import pandas as pd #Imports the Python Data Analysis Library
+def main(): #Defines the code inside as the main function
+    df = pd.read_csv('board2.csv') #Reads the board2.csv file
+
+    df['Average'] = df[['Math', 'Electronics', 'GEAS', 'Communication']].mean(axis=1) #Calculates the mean values of each subject
+
+    Ins_avg = df.loc[df['Track'] == 'Instrumentation', 'Average'].mean() #Calculates the mean values of the average scores of the data under the Instrumentation track
+    ME_avg = df.loc[df['Track'] == 'Microelectronics', 'Average'].mean() #Calculates the mean values of the average scores of the data under the Microelectronics track
+    Com_avg = df.loc[df['Track'] == 'Communication', 'Average'].mean() #Calculates the mean values of the average scores of the data under the Communication track
+
+    Luz_avg = df.loc[df['Hometown'] == 'Luzon', 'Average'].mean() #Calculates the mean values of the average scores of the data from Luzon
+    Vis_avg = df.loc[df['Hometown'] == 'Visayas', 'Average'].mean() #Calculates the mean values of the average scores of the data from Visayas
+    Min_avg = df.loc[df['Hometown'] == 'Mindanao', 'Average'].mean() #Calculates the mean values of the average scores of the data from Mindanao
+
+    Male_avg = df.loc[df['Gender'] == 'Male', 'Average'].mean() #Calculates the mean values of the average scores of the data under the Male gender
+    Female_avg = df.loc[df['Gender'] == 'Female', 'Average'].mean() #Calculates the mean values of the average scores of the data under the Female gender
+
+    avg_data = {'Average Score': {'Instrumentation': Ins_avg, 'Microelectronics': ME_avg, 'Communication': Com_avg,'Luzon': Luz_avg, 'Visayas': Vis_avg, 'Mindanao':     Min_avg, 'Male': Male_avg, 'Female': Female_avg}} #Compiles new data using the calculated mean values under the filename avg_data
+
+    avg_df = pd.DataFrame(avg_data) #Creates a new dataframe using the compiled avg_data
+    display(avg_df) #Displays the avg_df dataframe
+
+    avg_df.plot(kind='bar') #Visualizes the avg_df dataframe with a bar graph
+main() #Calls the main function
+```
+
 ### Requirements:
 
 • Python v.3.8 or later versions
