@@ -4,47 +4,58 @@ This is a repository that contains Jupyter Notebook code using the Python progra
 
 ## 1. ECE Board Exam Problem Part 1
 This code reads the given ```board2.csv``` file and creates a new category called 'Average' by using the ```.mean()``` code on the 'Math', 'Electronics', 'GEAS', and 'Communication' categories, adding and dividing by row by specifying ```.mean()``` as ```.mean(axis=1)```. The code then locates specific information using ```.loc[]``` and following the given conditions.
-```
-import pandas as pd
-def main():
-    df = pd.read_csv('board2.csv')
 
-    df['Average'] = df[['Math', 'Electronics', 'GEAS', 'Communication']].mean(axis=1)
+• Condition 1: Hometown: Visayas & Math: < 70
+• Output 1: Name, Gender, Track, Math
+
+• Condition A: Track: Instrumentation & Hometown: Luzon & Electronics: >70
+• Output A: Name, GEAS, Electronics
+
+• Condition B: Hometown: Mindanao & Gender: Female
+• Output B: Name, Track, Electronics, Average
+```
+import pandas as pd #Imports the Python Data Analysis Library
+def main():
+    df = pd.read_csv('board2.csv') #Reads the board2.csv file
+
+    df['Average'] = df[['Math', 'Electronics', 'GEAS', 'Communication']].mean(axis=1) #Calculates the mean values of each subject
     
-    problem_1 = df.loc[(df['Hometown'] == 'Visayas') & (df['Math'] < 70), ('Name', 'Gender', 'Track', 'Math')]    
-    problem_a = df.loc[(df['Electronics'] > 70), ('Name', 'GEAS', 'Electronics')]
-    problem_b = df.loc[(df['Hometown'] == 'Mindanao') & (df['Gender'] == 'Female') & (df['Average'] >= 55), ('Name', 'Track', 'Electronics', 'Average')]
+    Vis = df.loc[(df['Hometown'] == 'Visayas') & (df['Math'] < 70), ('Name', 'Gender', 'Track', 'Math')] #Locates the data under Visayas and with a Math score less than 70 and outputs the name, gender, track, and Math score   
+    Instru = df.loc[(df['Electronics'] > 70) & (df['Track'] == 'Instrumentation') & (df['Hometown'] == 'Luzon'), ('Name', 'GEAS', 'Electronics')] #Locates data under Instrumentation, Luzon, and with scores greater than 70 and outputs the name, GEAS scores, and Electronics scores
+    Mindy = df.loc[(df['Hometown'] == 'Mindanao') & (df['Gender'] == 'Female') & (df['Average'] >= 55), ('Name', 'Track', 'Electronics', 'Average')] #Locates data under Mindanao, Female, and with Average scores greater than or equal to 55 and outputs the name, track, Electronics scores, and and average scores
     
-    display(problem_1)
-    display(problem_a)
-    display(problem_b)  
+    display(Vis) #Displays the dataframe for problem 1
+    display(Instru) #Displays the dataframe from problem a
+    display(Mindy) #Displays the dataframe from problem b
 main()
 ```
 
 ## 2. ECE Board Exam Problem Part 2
-This code repeats the steps for finding the average values for each subject and then creates a new dataframe under the name ```avg_data``` containing the average values of the calculated overall mean scores. It uses a combination of ```.loc[]``` and ```.mean()``` to locate the average scores under specific features and finds the mean values of those average scores. It then displays the new dataframe under the name ```avg_df```.
+This code repeats the steps for finding the average values for each subject and then creates a new dataframe under the name ```avg_data``` containing the average values of the calculated overall mean scores. It uses a combination of ```.loc[]``` and ```.mean()``` to locate the average scores under specific features and finds the mean values of those average scores. It then displays the new dataframe under the name ```avg_df```. At the last segment of the code, the dataframe is visualized into a bar graph using ```.plot(kind='bar')```.
 ```
-import pandas as pd
+import pandas as pd #Imports the Python Data Analysis Library
 def main():
-    df = pd.read_csv('board2.csv')
-    
-    df['Average'] = df[['Math', 'Electronics', 'GEAS', 'Communication']].mean(axis=1)
+    df = pd.read_csv('board2.csv') #Reads the board2.csv file
 
-    Ins_avg = df.loc[df['Track'] == 'Instrumentation', 'Average'].mean()
-    ME_avg = df.loc[df['Track'] == 'Microelectronics', 'Average'].mean()
-    Com_avg = df.loc[df['Track'] == 'Communication', 'Average'].mean()
+    df['Average'] = df[['Math', 'Electronics', 'GEAS', 'Communication']].mean(axis=1) #Calculates the mean values of each subject
 
-    Luz_avg = df.loc[df['Hometown'] == 'Luzon', 'Average'].mean()
-    Vis_avg = df.loc[df['Hometown'] == 'Visayas', 'Average'].mean()
-    Min_avg = df.loc[df['Hometown'] == 'Mindanao', 'Average'].mean()
+    Ins_avg = df.loc[df['Track'] == 'Instrumentation', 'Average'].mean() #Calculates the mean values of the average scores of the data under the Instrumentation track
+    ME_avg = df.loc[df['Track'] == 'Microelectronics', 'Average'].mean() #Calculates the mean values of the average scores of the data under the Microelectronics track
+    Com_avg = df.loc[df['Track'] == 'Communication', 'Average'].mean() #Calculates the mean values of the average scores of the data under the Communication track
 
-    Male_avg = df.loc[df['Gender'] == 'Male', 'Average'].mean()
-    Female_avg = df.loc[df['Gender'] == 'Female', 'Average'].mean()
+    Luz_avg = df.loc[df['Hometown'] == 'Luzon', 'Average'].mean() #Calculates the mean values of the average scores of the data from Luzon
+    Vis_avg = df.loc[df['Hometown'] == 'Visayas', 'Average'].mean() #Calculates the mean values of the average scores of the data from Visayas
+    Min_avg = df.loc[df['Hometown'] == 'Mindanao', 'Average'].mean() #Calculates the mean values of the average scores of the data from Mindanao
 
-    avg_data = {'Average Score': {'Instrumentation': Ins_avg, 'Microelectronics': ME_avg, 'Communication': Com_avg,'Luzon':Luz_avg, 'Visayas': Vis_avg, 'Mindanao': Min_avg, 'Male': Male_avg, 'Female': Female_avg}}
+    Male_avg = df.loc[df['Gender'] == 'Male', 'Average'].mean() #Calculates the mean values of the average scores of the data under the Male gender
+    Female_avg = df.loc[df['Gender'] == 'Female', 'Average'].mean() #Calculates the mean values of the average scores of the data under the Female gender
 
-    avg_df = pd.DataFrame(avg_data)
-    display(avg_df)
+    avg_data = {'Average Score': {'Instrumentation': Ins_avg, 'Microelectronics': ME_avg, 'Communication': Com_avg,'Luzon': Luz_avg, 'Visayas': Vis_avg, 'Mindanao':     Min_avg, 'Male': Male_avg, 'Female': Female_avg}} #Compiles new data using the calculated mean values under the filename avg_data
+
+    avg_df = pd.DataFrame(avg_data) #Creates a new dataframe using the compiled avg_data
+    display(avg_df) #Displays the avg_df dataframe
+
+    avg_df.plot(kind='bar') #Visualizes the avg_df dataframe with a bar graph
 main()
 ```
 
