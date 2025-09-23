@@ -15,7 +15,7 @@ This code reads the given ```board2.csv``` file and creates a new category calle
 • Output B: Name, Track, Electronics, Average
 ```
 import pandas as pd #Imports the Python Data Analysis Library
-def main():
+def main(): #Defines the code inside as the main function
     df = pd.read_csv('board2.csv') #Reads the board2.csv file
 
     df['Average'] = df[['Math', 'Electronics', 'GEAS', 'Communication']].mean(axis=1) #Calculates the mean values of each subject
@@ -27,14 +27,14 @@ def main():
     display(Vis) #Displays the dataframe for problem 1
     display(Instru) #Displays the dataframe from problem a
     display(Mindy) #Displays the dataframe from problem b
-main()
+main() #Calls the main function
 ```
 
 ## 2. ECE Board Exam Problem Part 2
 This code repeats the steps for finding the average values for each subject and then creates a new dataframe under the name ```avg_data``` containing the average values of the calculated overall mean scores. It uses a combination of ```.loc[]``` and ```.mean()``` to locate the average scores under specific features and finds the mean values of those average scores. It then displays the new dataframe under the name ```avg_df```. At the last segment of the code, the dataframe is visualized into a bar graph using ```.plot(kind='bar')```.
 ```
 import pandas as pd #Imports the Python Data Analysis Library
-def main():
+def main(): #Defines the code inside as the main function
     df = pd.read_csv('board2.csv') #Reads the board2.csv file
 
     df['Average'] = df[['Math', 'Electronics', 'GEAS', 'Communication']].mean(axis=1) #Calculates the mean values of each subject
@@ -56,7 +56,7 @@ def main():
     display(avg_df) #Displays the avg_df dataframe
 
     avg_df.plot(kind='bar') #Visualizes the avg_df dataframe with a bar graph
-main()
+main() #Calls the main function
 ```
 
 ### Requirements:
