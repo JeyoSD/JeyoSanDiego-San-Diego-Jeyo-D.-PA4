@@ -3,7 +3,7 @@
 This is a repository that contains Jupyter Notebook code using the Python programming language. It is a set of two exercises that make use of Data Wrangling Python Concepts.
 
 ## 1. ECE Board Exam Problem Part 1
-This code reads the given ```board2.csv``` file and creates a new category called 'Average' by using the ```.mean()``` code on the 'Math', 'Electronics', 'GEAS', and 'Communication' categories, adding and dividing by row by specifying ```.mean()``` as ```.mean(axis=1)```. The code then locates specific information using ```.loc[]``` and following the given conditions and displays all the located data using ```display()```.
+The code imports the Python Data Analysis Library using ```import pandas as pd``` and reads the given ```board2.csv``` file. It then creates a new category called 'Average' by using ```.mean()``` on the 'Math', 'Electronics', 'GEAS', and 'Communication' categories, adding and dividing by row by specifying ```.mean()``` as ```.mean(axis=1)```. The code then locates specific information using ```.loc[]``` and following the given conditions and displays all the located data using ```display()```.
 
 • Condition 1: Hometown: Visayas & Math: < 70
 • Output 1: Name, Gender, Track, Math
